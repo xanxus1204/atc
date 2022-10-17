@@ -3,22 +3,16 @@
 using namespace std;
 typedef long long ll;
 int main() {
-    const ll AMAX = 100000;
-    vector<ll> count(AMAX);
     ll N,K;
     cin >> N >> K;
-    REP(i, N){
-        ll A,B;
-        cin >> A >> B;
-        count[A] += B;
+    vector<ll> ans;
+    ll a, b;
+    REP(i,N){
+        cin >> a >> b;
+        ans.insert(ans.end(), b, a);
     }
-    for(int ans = 1; ans <= AMAX; ans++){
-        
-        if (K <= count[ans]){
-            cout << ans << endl;
-            break;
-        }
-        K -= count[ans];
-    }
+    // REP(i,ans.size()) cout << ans[i];
+    // sort(ans.begin(), ans.end());
+    cout << ans[K];
     return 0;
 }

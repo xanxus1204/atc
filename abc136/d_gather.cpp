@@ -1,34 +1,34 @@
 #include<bits/stdc++.h>
-#define REP(i,n) for (int i=0;i<(n);i++)
 using namespace std;
 typedef long long ll;
 int main() {
     string S;
     cin >> S;
-    int N = S.size();
-    vector<ll> ans(N);
-    //Rについてのみ考える
-    int count = 0;
-    REP(i,N){
-        if(S[i] == 'R'){
-            count += 1;
-        }else{
-            ans[i-1] += (count+1)/2;
-            ans[i] += count/2;
-            count = 0;
-        }
-    }
-    count = 0;
-    for(int i = N; i >= 0; i--){
-        if(S[i] == 'L'){
-            count += 1;
-        }else{
-            ans[i+1] += (count+1)/2;
-            ans[i] += count/2;
-            count = 0;
-        }
-    }
-    REP(i,N) cout << ans[i] << " ";
+    vector<ll> child(S.length());
+    for(int i = 0; i < S.length(); i++) child[i] = 1;
 
+    ll end = 0;
+    while(end < 5){
+        for(int i = 0; i < S.length(); i++){
+            if (S[i] == 'R'){
+                if (child[i] > 0){
+                    child[i] -= 1;
+                    child[i+1] += 1;
+                }
+            }else if (S[i] == 'L'){
+                if (child[i] > 0){
+                    child[i] -= 1;
+                    child[i-1] += 1; 
+                }
+            }
+        }
+        end++;
+        for(int i = 0; i < S.length(); i++) cout << child[i] << " ";
+        cout << endl;
+
+
+    }
+
+    
     return 0;
 }
